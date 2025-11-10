@@ -97,15 +97,6 @@ const getUserProfile=async(req,res)=>
    }
 };
 
-const getalluser=async(req,res)=>{
-  try{
-const user=await User.find({})
-return res.json({success:true,user})
-  }catch(error){
-    return res.jso({success:false,message:error.message})
-  }
-}
-
  
 const uploadImage = (req, res) => {
   if (!req.file) {
@@ -120,5 +111,4 @@ module.exports = {
   loginUser,
   getUserProfile,
   uploadImage,
-  getalluser
 };

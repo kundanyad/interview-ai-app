@@ -8,8 +8,6 @@ const { registerUser, loginUser, getUserProfile,uploadImage, getalluser } = requ
 router.post("/register",upload.single('image'), registerUser);
 router.post("/login", loginUser);
 router.get("/profile",protect,getUserProfile);
-router.post("/getall",getalluser)
- 
 router.post("/upload-image", upload.single("image"), uploadImage);
 
 module.exports = router;
