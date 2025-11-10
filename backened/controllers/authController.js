@@ -1,6 +1,7 @@
 const bcrypt=require("bcryptjs");
 const User=require("../model/User");
 const  jwt=require("jsonwebtoken");
+const cloudinary = require('cloudinary').v2;
 
 const generateToken=(userid)=>
 {
@@ -12,7 +13,9 @@ const generateToken=(userid)=>
  
 const registerUser = async (req, res) => {
     try {
-        const { name, email, password, profileImageUrl } = req.body;
+        const { name, email, password } = req.body;
+        const profileImageUrl=req.file
+        const imageuploader=await cloudinary.uploader.upload(profileImageUrl.path)
   
         const userExist = await User.findOne({ email });
         if (userExist) {
@@ -28,7 +31,7 @@ const registerUser = async (req, res) => {
             name,
             email,
             password: hashedPassword,
-            profileImageUrl,
+            profileImageUrl:imageuploader.secure_url,
         });
 
         
@@ -94,6 +97,15 @@ const getUserProfile=async(req,res)=>
    }
 };
 
+const getalluser=async(req,res)=>{
+  try{
+const user=await User.find({})
+return res.json({success:true,user})
+  }catch(error){
+    return res.jso({success:false,message:error.message})
+  }
+}
+
  
 const uploadImage = (req, res) => {
   if (!req.file) {
@@ -108,4 +120,5 @@ module.exports = {
   loginUser,
   getUserProfile,
   uploadImage,
+  getalluser
 };

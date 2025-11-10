@@ -6,9 +6,6 @@ export const API_PATHS = {
         LOGIN: "/api/auth/login", // Authenticate user & return JWT token
         GET_PROFILE: "/api/auth/profile", // Get logged-in user details
     },
-    IMAGE: {
-        UPLOAD_IMAGE: "/api/auth/upload-image", // Upload profile picture
-    },
     AI: {
         GENERATE_QUESTIONS: "/api/ai/generate-questions", // Generate interview questions and answers using Gemini
         GENERATE_EXPLANATION: "/api/ai/generate-explanation", // Generate concept explanation using Gemini

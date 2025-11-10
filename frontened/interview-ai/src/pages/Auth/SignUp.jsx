@@ -19,54 +19,44 @@ const SignUp = ({ setCurrPage }) => {
   const { updateUser } = useContext(UserContext);
 
   const handleSignup = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    let profileImageUrl = "";
+  if (!fullname) return setError("Please enter full name.");
+  if (!validateEmail(email)) return setError("Please enter a valid email.");
+  if (!password) return setError("Please enter the password");
 
-    if (!fullname) {
-      setError("Please enter full name.");
-      return;
+  setError("");
+
+  try {
+    const formData = new FormData();
+    formData.append("name", fullname);
+    formData.append("email", email);
+    formData.append("password", password);
+
+    if (profilepic) {
+      formData.append("image", profilepic); // ✅ must match multer.single('image')
     }
 
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email.");
-      return;
+    const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    const { token } = response.data;
+    if (token) {
+      localStorage.setItem("token", token);
+      updateUser(response.data);
+    
+      navigate("/dashboard");
+window.location.reload()
     }
 
-    if (!password) {
-      setError("Please enter the password");
-      return;
-    }
+  } catch (error) {
+    setError(error?.response?.data?.message || "Something went wrong. Please try again.");
+  }
+};
 
-    setError("");
-
-    try {
-      if (profilepic) {
-        const imgUpload = await uploadimage(profilepic);
-        profileImageUrl = imgUpload.imageUrl || "";
-      }
-
-      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
-        name: fullname,
-        email,
-        password,
-        profileImageUrl, 
-      });
-
-      const { token } = response.data;
-      if (token) {
-        localStorage.setItem("token", token); 
-        updateUser(response.data);
-        navigate("/dashboard");
-      }
-    } catch (error) {
-      if (error.response && error.response.data.message) {
-        setError(error.response.data.message);
-      } else {
-        setError("Something went wrong. Please try again.");
-      }
-    }
-  };
 
   return (
     <div className="w-[90vw] md:w-[33vw] p-7 flex flex-col justify-center">

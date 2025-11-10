@@ -13,11 +13,12 @@ function ProfileInfoCard() {
         navigate("/");
     };
 
+console.log(user);
 
   return (
     user && (
     <div className='flex item-center '>
-         <img src={user.profileImageUrl} alt='' className='w-11 h-11 bg-gray-300 rounded-full mr-3' />
+         <img src={user?.profileImageUrl} alt='' className='w-11 h-11 bg-gray-300 rounded-full mr-3' />
            <div className=''>
              <div className='text-[15px] font-bold text-black leading-3'>
               {user.name || ""}

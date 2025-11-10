@@ -8,6 +8,8 @@ const sessionRoute = require("./routes/sessionRoute");
 const questionRoute = require("./routes/questionRoute");
 const { protect } = require("./middleware/authMiddleware");
 const { generateInterviewQuestion, generateConceptExplanation } = require("./controllers/aiController");
+const cloudDB = require("./config/cloudinary");
+
 
 const app = express();
 
@@ -22,7 +24,7 @@ app.use(
 );
 
 app.use(express.json());
-
+cloudDB()
 app.get("/", (req, res) => {
   res.send("Welcome to page");
 });
