@@ -29,7 +29,6 @@ const generateInterviewQuestion = async (req, res) => {
         const rawText = response.text;
         const cleanedText = rawText.replace(/^```json\s*/,"").replace(/```$/,"").trim();
 
-        // Expecting an array now
         const data = JSON.parse(cleanedText);
         if (!Array.isArray(data)) {
             return res.status(500).json({ message: "AI did not return an array of questions." });
@@ -83,7 +82,7 @@ const generateConceptExplanation = async (req, res) => {
       error: err.message
     });
   }
-};
+}
 
  
 

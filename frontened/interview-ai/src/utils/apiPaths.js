@@ -21,6 +21,13 @@ export const API_PATHS = {
     PIN: (id) => `/api/question/${id}/pin`,
     UPDATE_NOTE: (id) => `/api/question/${id}/note`,
     },
+    QUIZ: {
+    GENERATE: "/api/quiz/generate",
+    GET_ALL: "/api/quiz/my-quizzes",
+    GET_ONE: (id) => `/api/quiz/${id}`,
+    SUBMIT: "/api/quiz/submit",
+    RESULTS: "/api/quiz/results"
+  }
 };
 
 export { BASE_URL };

@@ -9,7 +9,7 @@ const questionRoute = require("./routes/questionRoute");
 const { protect } = require("./middleware/authMiddleware");
 const { generateInterviewQuestion, generateConceptExplanation } = require("./controllers/aiController");
 const cloudDB = require("./config/cloudinary");
-
+const quizRoute = require('./routes/quizRoute');
 
 const app = express();
 
@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/sessions", sessionRoute);
 app.use("/api/question", questionRoute);
-
+app.use("/api/quiz", quizRoute);
  
 app.post("/api/ai/generate-questions", protect, generateInterviewQuestion);
 app.post("/api/ai/generate-explanation", protect, generateConceptExplanation);
