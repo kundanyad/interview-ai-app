@@ -37,6 +37,9 @@ app.use("/api/quiz", quizRoute);
 app.post("/api/ai/generate-questions", protect, generateInterviewQuestion);
 app.post("/api/ai/generate-explanation", protect, generateConceptExplanation);
 
+
+ 
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const port = process.env.PORT || 5000;

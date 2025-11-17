@@ -1,5 +1,5 @@
 const { GoogleGenAI } = require('@google/genai');
-const { conceptExplainPrompt, questionAnswerPrompt } = require('../utils/prompts');
+const { conceptExplainPrompt, questionAnswerPrompt} = require('../utils/prompts');
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GOOGLE_API_KEY,
@@ -29,6 +29,7 @@ const generateInterviewQuestion = async (req, res) => {
         const rawText = response.text;
         const cleanedText = rawText.replace(/^```json\s*/,"").replace(/```$/,"").trim();
 
+        
         const data = JSON.parse(cleanedText);
         if (!Array.isArray(data)) {
             return res.status(500).json({ message: "AI did not return an array of questions." });
@@ -86,7 +87,8 @@ const generateConceptExplanation = async (req, res) => {
 
  
 
-module.exports = { generateInterviewQuestion, generateConceptExplanation };
+ 
+module.exports = { generateInterviewQuestion, generateConceptExplanation};
 
 
  
