@@ -27,7 +27,14 @@ export const API_PATHS = {
     GET_ONE: (id) => `/api/quiz/${id}`,
     SUBMIT: "/api/quiz/submit",
     RESULTS: "/api/quiz/results"
-  }
+  },    
+       MOCK_INTERVIEW: {
+        GENERATE: "/api/mock-interview/generate",
+        SUBMIT_ANSWER: "/api/mock-interview/submit-answer",
+        GET_RESULTS: (sessionId) => `/api/mock-interview/results/${sessionId}`,
+        GET_USER_INTERVIEWS: "/api/mock-interview/my-interviews"
+    }
+
 };
 
 export { BASE_URL };

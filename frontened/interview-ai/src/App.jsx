@@ -11,6 +11,11 @@ import QuizHistory from "./components/Quiz/QuizHistory";
 import UserProvider, { UserContext } from "./context/Usercontext";
 import { Navbar } from "./components/layouts/Navbar";
 
+// Import Mock Interview Components
+import MockInterviewForm from "./components/MockInterview/MockInterviewForm";
+import MockInterviewSession from "./components/MockInterview/MockInterviewSession";
+import MockInterviewResults from "./components/MockInterview/MockInterviewResults";
+
 const AppContent = () => {
   const { user, loading } = useContext(UserContext);
 
@@ -30,6 +35,13 @@ const AppContent = () => {
           <Route path="/" element={<Landingpage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/interview-prep/:sessionId" element={<Interviewpage />} />
+          
+          {/* Mock Interview Routes */}
+          <Route path="/mock-interview" element={<MockInterviewForm />} />
+          <Route path="/mock-interview/session/:sessionId" element={<MockInterviewSession />} />
+          <Route path="/mock-interview/results/:sessionId" element={<MockInterviewResults />} />
+          
+          {/* Quiz Routes */}
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/quiz/:quizId" element={<QuizComponent />} />
           <Route path="/quiz/results/:quizId" element={<QuizResults />} />
